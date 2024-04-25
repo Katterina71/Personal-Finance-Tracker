@@ -1,5 +1,118 @@
-header {
+nav {
+    height: 70px;
+    width: 100%;
+}
+
+.logo {
+    height: 50px;
+}
+
+.hero {
+    width: 100%;
+    object-fit: cover ;
+    object-position: 50%;
+}
+
+body {
+    font-family: "Montserrat", sans-serif;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    min-height: 100vh;
+
+    display: flex;
+  flex-direction: column;
+   
+}
+
+h1 {
+    font-family: "Nanum Gothic", sans-serif;
+    font-style: normal;
+    font-size: 65px;
+    font-weight: 800;
+    margin-top: 0;
+}
+.main {
+    display: flex;
+    justify-content: space-between;
+}
+
+.main-img{
+    width: 50%;
+    padding: 0 20px ;
+}
+
+.main-text {
+    margin-top: 40px;
+    width: 40%;
+}
+
+p {
+    line-height: 1.8;
+    font-size: 16px;
+}
+
+.topMenu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+
+}
+
+.btn {
+    display: flex;
+    gap: 10px;  /* Space between the buttons */
+}
+
+.btn-Login, .btn-SignUp {
+    
+    width: 120px;
+    height: 35px;
+    padding: 8px 16px;  
+    cursor: pointer;  
+
+}
+
+.btn-Login{
+    border: none;  
+    background-color: #f0f0f0;  
+    color: #333;  
+}
+
+.btn-SignUp {
+    border: 1px solid #fac36a;  
+    color: #333;  
+    background-color: white;  
+
+}
+.btn-Login:hover,
+.btn-SignUp:hover {
+    background-color: #e0e0e0;  
+    border: none;  
+}
+
+.btn-getStarted {
+    border: none;  
+    background-color: #fac36a;  
+    color: #333;  
+    width: 160px;
     height: 40px;
-    width: 100;
-    background-color: rgb(113, 2, 113);
+    font-size: 14px;
+    padding: 8px 16px;  
+    cursor: pointer;  
+}
+
+.btn-getStarted:hover {
+    background-color: #f1ab3a;  
+}
+
+footer {
+    height: 150px;
+    color: white;
+    background-color: #363d43;
+    margin-top: auto;
+    align-self: center;
+    display: flex;
+    justify-content: center;
 }

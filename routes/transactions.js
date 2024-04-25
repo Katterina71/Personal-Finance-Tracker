@@ -9,5 +9,4 @@ router
         res.json({ transactions });
     });
 
-
 module.exports = router;
