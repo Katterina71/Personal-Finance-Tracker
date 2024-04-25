@@ -32,9 +32,12 @@ app.get('/', (req,res) => {
 
 
 //404 Error - Page Unavailable
-app.use((req,res,next) => {
-    next(error(404, "Ooops.. Page Not found!"))
-});
+// app.use((req,res,next) => {
+//     next(error(404, "Ooops.. Page Not found!"))
+// });
+app.use((req,res) => {
+    res.status(404).render('404');
+})
 
 app.listen(port, ()=> {
     console.log('Server is listening on port: ' + port)
