@@ -7,13 +7,13 @@
 const users = [
     {
         id: 1,
-        name: "Troy",
+        userName: "Troy",
         login: "Troy67",
         password: "qwerty67",
     },
     {
         id: 2,
-        name: "John",
+        userName: "John",
         login: "John12",
         password: "qwerty12",
     },

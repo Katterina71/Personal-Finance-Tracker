@@ -22,7 +22,7 @@ body {
     min-height: 100vh;
 
     display: flex;
-  flex-direction: column;
+    flex-direction: column;
    
 }
 
@@ -93,7 +93,7 @@ p {
     border: none;  
 }
 
-.btn-getStarted {
+.btn-getStarted, .btn-form {
     border: none;  
     background-color: #fac36a;  
     color: #333;  
@@ -104,7 +104,7 @@ p {
     cursor: pointer;  
 }
 
-.btn-getStarted:hover {
+.btn-getStarted:hover, .btn-form:hover {
     background-color: #f1ab3a;  
 }
 
@@ -116,4 +116,32 @@ footer {
     align-self: center;
     display: flex;
     justify-content: center;
+}
+
+.div-form{
+    display: flex;
+    justify-content: center;
+    margin-top:10%;
+    width: 100%;
+}
+
+form {
+    
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height:350px;
+    border: 1px solid #fac36a;
+    border-radius: 10px;
+    padding: 60px 30px 0;
+    align-items: center;
+    gap: 20px;  
+}
+input {
+    border: none;
+    width: 250px;
+    height: 50px;
+    background-color: rgb(248, 248, 248);
+    padding-left: 15px;
+
 }
