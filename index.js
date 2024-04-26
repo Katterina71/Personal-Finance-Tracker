@@ -12,12 +12,15 @@ app.set('view engine', 'ejs');
 const users = require("./routes/users.js");
 const transactions = require("./routes/transactions");
 const balance = require("./routes/balance");
+const subcategories = require("./routes/subcategories");
+
 
 
 // Use our Routes
 app.use("/api/users", users);
 app.use("/api/transactions", transactions);
 app.use("/api/balance", balance);
+app.use("/api/subcategories", subcategories.Router);
 
 //connect CSS file
 const path = require('path');
@@ -26,24 +29,77 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.get('/', (req,res) => {
-    res.render('home')
+    res.render('home', {title: 'Main'})
 })
 
+
+// Adding some HATEOAS links.
+app.get("/api", (req, res) => {
+  res.json({
+    links: [
+      {
+        href: "api/users",
+        rel: "users",
+        type: "GET",
+      },
+      {
+        href: "api/users",
+        rel: "users",
+        type: "POST",
+      },
+      {
+        href: "api/transactions",
+        rel: "transactions",
+        type: "GET",
+      },
+      {
+        href: "api/transactions",
+        rel: "transactions",
+        type: "POST",
+      },
+      {
+        href: "api/transactions",
+        rel: "transactions",
+        type: "DELETE",
+      },
+      {
+        href: "api/balance",
+        rel: "balance",
+        type: "GET",
+      },
+      {
+        href: "api/balance",
+        rel: "balance",
+        type: "POST",
+      },
+      {
+        href: "api/subcategories",
+        rel: "subcategories",
+        type: "GET",
+      },
+    ],
+  });
+});
+
+
+
+
 app.get('/register', (req,res)=> {
-    res.render('register');
+    res.render('register', {title: 'Register Form'
+    });
 })
 
 app.get('/login', (req,res)=> {
-    res.render('login');
+    res.render('login', {title: 'Login'});
 })
 
-//404 Error - Page Unavailable
-// app.use((req,res,next) => {
-//     next(error(404, "Ooops.. Page Not found!"))
-// });
+app.get('/help', (req, res) => {
+    console.log(subcategories.Data);
+    res.render('help', { title: 'Knowledge Repository'});
+})
 
 app.use((req,res) => {
-    res.status(404).render('404');
+    res.status(404).render('404', {title: 'Page not found'});
 })
 
 

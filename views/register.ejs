@@ -5,12 +5,13 @@
     <%- include ('./partials/nav') %>
     <div class="div-form">
        
-        <form action="">
+        <form class="form" action="/dashbord" method="POST">
             <h2 style="color: #fac36a; margin:0">Registration form:</h2>
-            <input type="text" name="userName" id="userName" placeholder="Your Name">
-            <input type="text" name="userName" id="login" placeholder="Create Account Name">
-            <input type="text" name="userName" id="password" placeholder="Create Password">
-            <button type="submit" class = "btn-form">Create account</button>
+            <input class = "input-filed" type="text" name="userName" id="userName" placeholder="Your Name">
+            <input class = "input-filed"type="text" name="userName" id="login" placeholder="Create Account Name">
+            <input class = "input-filed" type="text" name="userName" id="password" placeholder="Create Password">
+            <input type="submit" class = "btn-form" value="Create account">
+            <a href="/login">I've already have an account</a>
         </form>
     </div>
     <%- include ('./partials/footer') %>

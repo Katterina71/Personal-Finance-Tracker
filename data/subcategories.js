@@ -174,3 +174,5 @@ const subcategories = [
         categoryId: 8,
     }
 ]
+
+module.exports = subcategories;
