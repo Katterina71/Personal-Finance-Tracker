@@ -154,3 +154,8 @@ footer {
     font-family: "Nanum Gothic", sans-serif;
     font-style: normal;
 } */
+
+.subcategories {
+    display: flex;
+    gap: 20px
+}

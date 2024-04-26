@@ -94,8 +94,9 @@ app.get('/login', (req,res)=> {
 })
 
 app.get('/help', (req, res) => {
-    console.log(subcategories.Data);
-    res.render('help', { title: 'Knowledge Repository'});
+    const subcategoriesDate = subcategories.Data;
+    const categories = subcategories.CategoriesData
+    res.render('help', { title: 'Knowledge Repository', subcategoriesDate, categories });
 })
 
 app.use((req,res) => {

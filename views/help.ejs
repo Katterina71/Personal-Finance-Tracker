@@ -6,22 +6,19 @@
     <div style="margin-top: 100px;">
     <h1>Knowledge Repository</h1>
     <div>
-        <h2>Household and Living</h2>
-
-        <!-- <h2>Transportation</h2>
-
-        <h2>Food and Dining</h2>
-
-        <h2>Health and Wellness</h2>
-
-        <h2>Personal and Family Care</h2>
-
-        <h2>Entertainment and Leisure</h2>
-
-        <h2>Savings and Investments</h2>
-
-        <h2>Miscellaneous</h2> -->
-
+        <% if (categories.length > 0) { %>
+        <% categories.forEach(category => { %>
+            <h2 style="color:#fac36a"><%=category.name %></h2>
+        <% const subcategories = subcategoriesDate.filter(e => e.categoryId  == category.id)%>
+        <% if (subcategories.length > 0) { %>
+            <% subcategories.forEach(e => { %>
+            <div class="subcategories">
+            <h3><%= e.name %></h3> 
+            <p><%= e.description %></p>  
+            </div>  
+         <%})} %>
+        <%}) %>
+        <%} %>
     </div>
     </div>
     <%- include('./partials/footer') %>

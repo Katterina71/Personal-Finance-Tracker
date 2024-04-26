@@ -14,3 +14,4 @@ router
 
 exports.Router = router;
 exports.Data =  subcategories;
+exports.CategoriesData =  categories;
