@@ -1,27 +1,29 @@
 const express = require('express');
 const router = express.Router();
 
-const path = require('path');
-const fs = require('fs');
 
+// Read and add update date to files
+const path = require('path');
+const updateData = require('../utilities/update-data-files');
+const dataFilePath = path.join(__dirname, '../data/users.js');
 
 router.route('/api').get((req, res) => {
+        let users = updateData.loadData(dataFilePath);
         res.json({ users });
     });
 
 router.route('/register').get((req,res)=> {
-        res.render('register', {title: 'Register Form'});
+        res.render('register', {title: 'Register Form', userExist:''});
  })
 
 
-
 router.post('/add',(req, res,next) => {
-    console.log(req.method);
+  
     if (req.body.userName && req.body.login && req.body.password) {
 
-        let users = loadData();
+        let users = updateData.loadData(dataFilePath);
         if (users.find((u) => u.login == req.body.login)) {
-            next(res.send('This user exists!').status(404));
+            next(res.render('register', {title: 'Register Form', userExist:'This user has already existed'}));
           }
         else {
 
@@ -33,35 +35,13 @@ router.post('/add',(req, res,next) => {
         };
         
         users.push(user);
-        saveData(users);
-
-        res.send('User updated successfully');
+        updateData.saveData(users, dataFilePath);
+        res.redirect(`/dashboard/${user.userName}`)
 
         }
       } else next(res.send('Insufficient Data').status(404));
 });
 
-// Read and add update date to files
-const dataFilePath = path.join(__dirname, '../data/users.js');
-
-function loadData() {
-    try {
-        const fileData = fs.readFileSync(dataFilePath, 'utf8');
-        return JSON.parse(fileData);
-    } catch (err) {
-        console.error('Error reading file:', err);
-        return [];
-    }
-}
-
-function saveData(data) {
-    try {
-        const dataString = JSON.stringify(data, null, 2);
-        fs.writeFileSync(dataFilePath, dataString, 'utf8');
-    } catch (err) {
-        console.error('Error writing file:', err);
-    }
-}
 
 
 module.exports = router;

@@ -43,9 +43,9 @@ app.get('/help', (req, res) => {
     res.render('help', { title: 'Knowledge Repository', subcategoriesDate, categories });
 })
 
-// app.get('/register', (req,res)=> {
-//   res.render('register', {title: 'Register Form'});
-// })
+app.get('/dashboard/:userName', (req,res)=> {
+  res.render('dashboard', {title: 'dashboard'});
+})
 
 app.get('/login',(req,res)=> {
   res.render('login', {title: 'Login'});
