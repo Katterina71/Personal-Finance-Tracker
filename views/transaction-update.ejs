@@ -38,14 +38,28 @@
         </tr>
     </table>
     <div class="div-transaction">
+
     <form action="/transactions/<%= userId %>?transaction=<%= transactionId %>" method="patch">
             <input type="submit" class = "btn-edit" value="Edit">
      </form> 
-    <form action="/transactions/<%= userId %>?transaction=<%= transactionId %>" method="Delete">
-       <input type="submit" class = "btn-form" value="Delete">
-    </form> 
+   
+     <a href="#" onclick="deleteTransaction('<%= userId %>', '<%= transactionId %>'); return false;"><button  class="btn-form">Delete</button></a>
 
     </div>
     <%- include ('./partials/footer') %>
+    
+        <script>
+        function deleteTransaction(userId, transactionId) {
+            fetch(`/transactions/${userId}?transaction=${transactionId}`, {
+                method: 'DELETE',
+            }).then(response => {
+                if (response.ok) return response.json();
+                throw new Error('Something went wrong');
+            }).then(data => {
+                console.log('Deleted:', data);
+
+            }).catch(error => console.error('Error:', error));
+        }
+        </script>
 </body>
 </html>

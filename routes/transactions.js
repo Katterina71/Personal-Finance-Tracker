@@ -63,33 +63,36 @@ router.route('/:userId/')
     const categoriesDate = subcategories.CategoriesData;
     const subcategoriesDate = subcategories.Data;
 
+    console.log(transaction.subCategoryId);
+
     const subcategory = subcategoriesDate.find(sc => sc.id == transaction.subCategoryId);
     const category = categoriesDate.find(c => c.id == subcategory.categoryId);
 
-    // res.render('transaction-update', {title: 'Change transaction'});
     res.render('transaction-update', {title: 'Change transaction', userId, transactionId, transaction, category, subcategory} )
 }) 
 
-
-.delete((req, res) => {
+.delete((req, res, next) => {
         console.log('click');
 
-        const userId = req.params.id;
-        const transactionId = req.query.id;
+        const userId = req.params.userId;
+        const transactionId = req.query.transaction;
 
         console.log(userId);
         console.log(transactionId);
+
         let transactions = updateData.loadData(dataFilePath);
         const transaction = transactions.find((t, i) => {
-            if (t.id == req.query.id && t.userId == req.params.id) {
+            if (t.id == transactionId && t.userId == userId) {
                 transactions.splice(i, 1);
               return true;
             }
           });
           
-          updateData.saveData(transactions, dataFilePath);
 
-          if (transaction)  updateData.saveData(transactions, dataFilePath);
+          if (transaction)  {
+            updateData.saveData(transactions, dataFilePath)
+            res.redirect(`/dashboard/${userId}`);
+        }
           else next();
      
 })
