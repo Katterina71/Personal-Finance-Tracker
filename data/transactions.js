@@ -58,5 +58,15 @@
     "description": "Coffe",
     "cardName": "MasterCard",
     "type": "Extension"
+  },
+  {
+    "id": 8,
+    "userId": "11",
+    "subCategoryId": "11",
+    "amount": "100",
+    "date": "2024-04-18",
+    "description": "Coffe",
+    "cardName": "1",
+    "type": "4"
   }
 ]

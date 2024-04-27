@@ -56,7 +56,7 @@ router.get('/login/check',(req, res, next) => {
 
         if (user.login == req.query.login) {
             if (user.password == req.query.password){
-             res.redirect(`/balance/${user.id}`)}
+             res.redirect(`/dashboard/${user.id}`)}
             else { next(res.redirect('/users/login'));
             }
           }
