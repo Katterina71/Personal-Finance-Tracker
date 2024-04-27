@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include ('./partials/head') %>
+<body>
+    <%- include ('./partials/nav') %>
+  
+       
+        <h1>Change transaction</h1>
+
+    <table>
+        <tr>
+            <td style = 'font-weight: 700;'>Category</td>
+            <td><%=category.name%></td>
+        </tr>
+        <tr>
+            <td style = 'font-weight: 700;'>Subcategory</td>
+            <td><%=subcategory.name%></td>
+        </tr>
+        <tr>
+            <td style = 'font-weight: 700;'>Transaction date</td>
+            <td><%=transaction.date%></td>
+        </tr>
+        <tr>
+            <td style = 'font-weight: 700;'>Amount</td>
+            <td><%=transaction.amount%></td>
+        </tr>
+        <tr>
+            <td style = 'font-weight: 700;'>Description</td>
+            <td><%=transaction.description%></td>
+        </tr>
+        <tr>
+            <td style = 'font-weight: 700;'>Card Name</td>
+            <td><%=transaction.cardName%></td>
+        </tr>
+        <tr>
+            <td style = 'font-weight: 700;'>Type of Spending</td>
+            <td><%=transaction.type%></td>
+        </tr>
+    </table>
+    <div class="div-transaction">
+    <form action="/transactions/<%= userId %>?transaction=<%= transactionId %>" method="patch">
+            <input type="submit" class = "btn-edit" value="Edit">
+     </form> 
+    <form action="/transactions/<%= userId %>?transaction=<%= transactionId %>" method="Delete">
+       <input type="submit" class = "btn-form" value="Delete">
+    </form> 
+
+    </div>
+    <%- include ('./partials/footer') %>
+</body>
+</html>

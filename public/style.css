@@ -81,7 +81,7 @@ p {
     color: #333;  
 }
 
-.btn-SignUp {
+.btn-SignUp  {
     border: 1px solid #fac36a;  
     color: #333;  
     background-color: white;  
@@ -108,7 +108,18 @@ p {
 
 }
 
-.btn-getStarted:hover, .btn-form:hover {
+.btn-edit {
+    border: 1px solid #fac36a;  
+    color: #333;  
+    background-color: white;  
+    width: 160px;
+    height: 40px;
+    font-size: 14px;
+    padding: 8px 16px;  
+    cursor: pointer;  
+}
+
+.btn-getStarted:hover, .btn-form:hover, .btn-edit:hover {
     background-color: #f1ab3a;  
 }
 
@@ -151,10 +162,14 @@ footer {
 
 }
 
-/* a {
-    font-family: "Nanum Gothic", sans-serif;
-    font-style: normal;
-} */
+.div-transaction {
+    display: flex;
+    width: 300px;
+    min-height:300px;
+    align-items: center;
+    gap: 20px; 
+    justify-content: center;
+}
 
 .subcategories {
     display: flex;

@@ -46,56 +46,53 @@ router.route('/:id/create').get((req,res)=> {
       } else next(res.send('Insufficient Data').status(404));
 });
 
+router.route('/:userId/')
+.get((req,res) => {
+   
 
-// router.post('/add',(req, res,next) => {
-  
-//     if (req.body.userName && req.body.login && req.body.password) {
+    const userId = req.params.userId;
+    const transactionId = req.query.transaction;
 
-//         let users = updateData.loadData(dataFilePath);
-//         if (users.find((u) => u.login == req.body.login)) {
-//             next(res.render('register', {title: 'Register Form', userExist:'This user has already existed'}));
-//           }
-//         else {
+    let transactions = updateData.loadData(dataFilePath);
+    let transaction = transactions.find(t => {
+        if (t.id == transactionId &&  t.userId == userId){
+            return t;
+        }
+    })
+    
+    const categoriesDate = subcategories.CategoriesData;
+    const subcategoriesDate = subcategories.Data;
 
-//         const user = {
-//           id: users[users.length - 1].id + 1,
-//           userName: req.body.userName,
-//           login: req.body.login,
-//           password: req.body.password,
-//         };
-        
-//         users.push(user);
-//         updateData.saveData(users, dataFilePath);
-//         res.redirect(`/dashboard/${user.id}`)
+    const subcategory = subcategoriesDate.find(sc => sc.id == transaction.subCategoryId);
+    const category = categoriesDate.find(c => c.id == subcategory.categoryId);
 
-//         }
-//       } else next(res.send('Insufficient Data').status(404));
-// });
+    // res.render('transaction-update', {title: 'Change transaction'});
+    res.render('transaction-update', {title: 'Change transaction', userId, transactionId, transaction, category, subcategory} )
+}) 
 
 
-// router.route('/login').get((req,res)=> {
-//     res.render('login', {title: 'Login', userCheck: ''});
-//   });
+.delete((req, res) => {
+        console.log('click');
 
-  
-// router.get('/login/check',(req, res, next) => {
+        const userId = req.params.id;
+        const transactionId = req.query.id;
 
-//     if (req.query.login && req.query.password) {
-//         let users = updateData.loadData(dataFilePath);
-//         let user = users.find((u) => u.login == req.query.login)
-
-//         if (user.login == req.query.login) {
-//             if (user.password == req.query.password){
-//              res.redirect(`/balance/${user.id}`)}
-//             else { next(res.redirect('/users/login'));
-//             }
-//           }
+        console.log(userId);
+        console.log(transactionId);
+        let transactions = updateData.loadData(dataFilePath);
+        const transaction = transactions.find((t, i) => {
+            if (t.id == req.query.id && t.userId == req.params.id) {
+                transactions.splice(i, 1);
+              return true;
+            }
+          });
           
-//         else {
-//             next(res.render('/users/login', {title: 'Login', userCheck:'This user not found'}));
-//         }
-//       } else next(res.send('Insufficient Data').status(404));
+          updateData.saveData(transactions, dataFilePath);
 
-// })
+          if (transaction)  updateData.saveData(transactions, dataFilePath);
+          else next();
+     
+})
+
 
 module.exports = router;
