@@ -24,14 +24,12 @@ function saveData(data, dataFilePath) {
 function getAmountIfCurrentMonth(balance) {
     let currentDate = new Date(); 
     let currentMonthYear = currentDate.toISOString().slice(0, 7);
-    console.log('1'+balance[0].month);
-    console.log('2'+currentMonthYear);
-    for (let i in balance ) {
-    if (balance[i].month == currentMonthYear) {
-        return balance[i].amount;
-    }
-    }
-    if (!balance.month) return null; 
+    console.log(balance);
+    if (balance.length >0) {
+    let monthBalance =  balance.find(b => b.month == currentMonthYear);
+            if (monthBalance) return monthBalance.amount
+            else return "No balance";}
+    else {return "No balance";}
 }
 
 function getAllMonthTransactions(transactions, date) {

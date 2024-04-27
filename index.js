@@ -58,35 +58,21 @@ app.get('/dashboard/:id', (req,res)=> {
   const id = req.params.id
   let usersData = updateData.loadData(dataFilePathUser);
   let user = usersData.find(u => u.id == id)
-  
+  console.log(user);
 
   //Find current balance
   let usersBalance = updateData.loadData(dataFilePathBalance);
   let userBalance = usersBalance.filter(u => u.userId == id);
 
-  
-  if (userBalance.length == 0){
-    currentBudget = 'No budget'
-  }
-  
-  else {
+  const currentBudget = updateData.getAmountIfCurrentMonth(userBalance);
+ 
 
-  let currentBudget = updateData.getAmountIfCurrentMonth(userBalance);
-  console.log(currentBudget);
-  if (!currentBudget) {
-    currentBudget = 'There is no budget planned for this month'
-  }
-  }
   //Find all transactions this month
   const allTransactions = updateData.loadData(dataFilePathTransactions);
 
   let userAllTransactions = allTransactions.filter(t =>t.userId == req.params.id);
   
-
-
   let userMonthTransactions = updateData.getAllMonthTransactions(userAllTransactions, today)
-  console.log("userMonthTransactions")
-  console.log(userMonthTransactions);
   
   res.render('dashboard', {title: 'Dashboard', user, currentBudget, today: dateString, userMonthTransactions});
 
