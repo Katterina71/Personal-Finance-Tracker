@@ -36,6 +36,8 @@ const path = require('path');
 app.use(express.static(path.join(__dirname, 'public')));
 
 const dataFilePathTransactions = path.join(__dirname, './data/transactions.js');
+const dataFilePathUser = path.join(__dirname, './data/users.js');
+const dataFilePathBalance = path.join(__dirname, './data/balance.js');
 
 app.get('/', (req,res) => {
     res.render('home', {title: 'Main'})
@@ -50,26 +52,41 @@ app.get('/help', (req, res) => {
 app.get('/dashboard/:id', (req,res)=> {
 
   const today = new Date();
-  console.log(today);
   const dateString = today.toISOString().split('T')[0];
 
   //Find user
   const id = req.params.id
-  let user = users.UsersData.find(u => u.id == id)
+  let usersData = updateData.loadData(dataFilePathUser);
+  let user = usersData.find(u => u.id == id)
+  
 
   //Find current balance
-  let userBalance = balance.BalanceData.filter(u => u.userId == id);
+  let usersBalance = updateData.loadData(dataFilePathBalance);
+  let userBalance = usersBalance.filter(u => u.userId == id);
+
+  
+  if (userBalance.length == 0){
+    currentBudget = 'No budget'
+  }
+  
+  else {
+
   let currentBudget = updateData.getAmountIfCurrentMonth(userBalance);
+  console.log(currentBudget);
   if (!currentBudget) {
     currentBudget = 'There is no budget planned for this month'
   }
-
+  }
   //Find all transactions this month
   const allTransactions = updateData.loadData(dataFilePathTransactions);
-  let userAllTransactions = allTransactions.filter(t =>t.userId == id)
-  let userMonthTransactions = updateData.getAllMonthTransactions(userAllTransactions, today)
+  let userAllTransactions = allTransactions.filter(t =>t.userId == id);
 
-  res.render('dashboard', {title: 'Dashboard', user, balance: currentBudget, today: dateString, userMonthTransactions});
+
+  let userMonthTransactions = updateData.getAllMonthTransactions(userAllTransactions, today)
+  console.log(userMonthTransactions);
+  
+  res.render('dashboard', {title: 'Dashboard', user, currentBudget, today: dateString, userMonthTransactions});
+
 })
 
 

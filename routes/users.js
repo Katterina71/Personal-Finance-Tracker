@@ -36,7 +36,7 @@ router.post('/add',(req, res,next) => {
         
         users.push(user);
         updateData.saveData(users, dataFilePath);
-        res.redirect(`/dashboard/${user.id}`)
+        res.redirect(`/balance/${user.id}`)
 
         }
       } else next(res.send('Insufficient Data').status(404));

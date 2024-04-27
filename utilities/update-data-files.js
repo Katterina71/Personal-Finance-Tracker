@@ -24,22 +24,31 @@ function saveData(data, dataFilePath) {
 function getAmountIfCurrentMonth(balance) {
     let currentDate = new Date(); 
     let currentMonthYear = currentDate.toISOString().slice(0, 7);
-
-    if (balance.month === currentMonthYear) {
-        return balance.amount;
+    console.log('1'+balance[0].month);
+    console.log('2'+currentMonthYear);
+    for (let i in balance ) {
+    if (balance[i].month == currentMonthYear) {
+        return balance[i].amount;
     }
-    return null; 
+    }
+    if (!balance.month) return null; 
 }
 
-function getAllMonthTransactions(transaction, date) {
-    let monthNumber = date.getMonth() + 1; 
-    let yearNumber = date.getFullYear(); 
-    const datePrefix = `${yearNumber}-${monthNumber.toString().padStart(2, '0')}`;
+function getAllMonthTransactions(balance, date) {
+    if (!Array.isArray(balance) || balance.length === 0) {
+        console.log('Invalid or empty balance array.');
+        return null;
+    }
 
-    return transaction.filter(transaction => {
-        const transactionDatePrefix = transaction.date.slice(0, 7);
-        return transactionDatePrefix === datePrefix;
-    });
+    let currentDate = new Date();
+    let currentMonthYear = currentDate.toISOString().slice(0, 7);
+
+    for (let item of balance) {
+        if (item.month === currentMonthYear) {
+            return item.amount;
+        }
+    }
+    return null;
 }
 
 exports.loadData = loadData;

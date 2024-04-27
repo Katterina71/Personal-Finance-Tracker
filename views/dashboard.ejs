@@ -7,7 +7,7 @@
     <h1>Welcome, <%=user.userName%></h1>
     <div>
         <p>Todays date: <span style="font-size: 18px; font-weight: 700;"><%=today%></span></p>
-         <p>Planned budget for this month:  <span style="font-size: 18px; font-weight: 700;"><%=balance%></span></p>
+         <p>Planned budget for this month:  <span style="font-size: 18px; font-weight: 700;"><%=currentBudget%></span></p>
     </div>
 
     <a href="/transactions/<%=user.id%>/create"><button class="btn-form">Add transaction</button></a>
@@ -24,11 +24,9 @@
                     <td style = 'font-weight: 700;'>Editing</td>
                 </tr>
             </thead>
-        <% if (userMonthTransactions.length > 0) { %>
+        <% if (userMonthTransactions) { %>
             <% userMonthTransactions.forEach(transaction=> { %>
-            
-                    <tr>
-                        
+                    <tr>     
                         <td><%=transaction.date%></td>
                         <td><%=transaction.amount%></td>
                         <td><%=transaction.description%></td>
