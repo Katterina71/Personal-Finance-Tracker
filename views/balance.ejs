@@ -5,16 +5,13 @@
     <%- include ('./partials/nav') %>
     <div class="div-form">
        
-        <form class="form" action="/dashbord" method="POST">
+        <form class="form" action="/balance/<%= userId %>/create" method="POST">
             <h2 style="color: #fac36a; margin:0">Add your current budget:</h2>
-            <label for="dateStart"></label>
-            <!-- <input class = "input-filed" type="date" name="dateStart" id="dateStart" placeholder="Date Start">
-            <input class = "input-filed" type="date" name="dateEnd" id="dateEnd" placeholder="Date End"> -->
+            <label for="dateStart">Month:</label>
+            <input class = "input-filed" type="month" name="month" placeholder="Month">
 
-            <input class = "input-filed" type="month" name="dateEnd" id="dateEnd" placeholder="Month">
-
-            <label for="amount"></label>
-            <input class = "input-filed" type="number" name="amount" id="amount" placeholder="Amount">
+            <label for="amount">Amount:</label>
+            <input class = "input-filed" type="number" name="amount" placeholder="Amount">
             <input type="submit" class = "btn-form" value="Create account">
 
         </form>

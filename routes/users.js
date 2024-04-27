@@ -36,12 +36,36 @@ router.post('/add',(req, res,next) => {
         
         users.push(user);
         updateData.saveData(users, dataFilePath);
-        res.redirect(`/dashboard/${user.userName}`)
+        res.redirect(`/dashboard/${user.id}`)
 
         }
       } else next(res.send('Insufficient Data').status(404));
 });
 
 
+router.route('/login').get((req,res)=> {
+    res.render('login', {title: 'Login', userCheck: ''});
+  });
+
+  
+router.get('/login/check',(req, res, next) => {
+
+    if (req.query.login && req.query.password) {
+        let users = updateData.loadData(dataFilePath);
+        let user = users.find((u) => u.login == req.query.login)
+
+        if (user.login == req.query.login) {
+            if (user.password == req.query.password){
+             res.redirect(`/balance/${user.id}`)}
+            else { next(res.redirect('/users/login'));
+            }
+          }
+          
+        else {
+            next(res.render('/users/login', {title: 'Login', userCheck:'This user not found'}));
+        }
+      } else next(res.send('Insufficient Data').status(404));
+
+})
 
 module.exports = router;

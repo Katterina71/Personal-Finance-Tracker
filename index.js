@@ -8,9 +8,8 @@ app.set('view engine', 'ejs');
 
 const subcategories = require("./routes/subcategories");
 const users = require("./routes/users.js");
-
-
-
+const balance =require("./routes/balance.js")
+// const balance = require("./routes/balance.js");
 
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -18,6 +17,7 @@ app.use(bodyParser.json({ extended: true }));
 
 // Use our Routes
 app.use("/users", users);
+app.use("/balance", balance);
 app.use("/subcategories", subcategories.Router);
 
 //check
@@ -43,12 +43,8 @@ app.get('/help', (req, res) => {
     res.render('help', { title: 'Knowledge Repository', subcategoriesDate, categories });
 })
 
-app.get('/dashboard/:userName', (req,res)=> {
+app.get('/dashboard/:id', (req,res)=> {
   res.render('dashboard', {title: 'dashboard'});
-})
-
-app.get('/login',(req,res)=> {
-  res.render('login', {title: 'Login'});
 })
 
 
