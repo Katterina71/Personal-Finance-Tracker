@@ -96,19 +96,13 @@ router.route('/:userId/')
 
           if (transaction)  {
             updateData.saveData(transactions, dataFilePath)
-            res.redirect(`/dashboard/${userId}`);
+            res.json({ redirect: `/dashboard/${userId}`});
         }
           else next();
      
 })
 
 .patch((req, res, next) => {
-
-    console.log('click')
-    console.log(req.params)
-    console.log(req.query)
-    console.log(req.body)
-
 
     const userId = req.params.userId;
     const transactionId = req.query.transaction;
@@ -126,16 +120,16 @@ router.route('/:userId/')
           }
 
           return true;
- } 
-}); 
+    } 
+    }); 
 
-      if (transactions)  {
-        updateData.saveData(transactions, dataFilePath)
-        res.redirect(`/dashboard/${userId}`);
+    if (transactions)  {
+            updateData.saveData(transactions, dataFilePath);
+            res.json({ redirect: `/dashboard/${userId}`});
     }
-      else next();
- 
-})
+        else next();
+
+    })
 
 
 module.exports = router;

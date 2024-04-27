@@ -68,4 +68,8 @@ router.get('/login/check',(req, res, next) => {
 
 })
 
-module.exports = router;
+let usersData = updateData.loadData(dataFilePath);
+
+exports.Router =  router;
+exports.UsersData= usersData;
+

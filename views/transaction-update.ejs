@@ -73,7 +73,7 @@
                 if (response.ok) return response.json();
                 throw new Error('Something went wrong');
             }).then(data => {
-                console.log('Deleted:', data);
+                { redirect: `/dashboard/${userId}` }; 
 
             }).catch(error => console.error('Error:', error));
         }
@@ -100,7 +100,7 @@
                 if (response.ok) return response.json();
                 throw new Error('Something went wrong');
             }).then(data => {
-                
+                form.style.visibility = 'hidden';
             }).catch(error => console.error('Error:', error));
         }
 

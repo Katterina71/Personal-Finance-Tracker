@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <%- include('./partials/head') %>
- <!-- <title> Page not found - 404 Error</title> -->
 <body>
     <%- include('./partials/nav') %>
     <div style="margin-top: 100px;">
-    <h1>404: Ledger Missing</h1>
-    <p>Hmm, it looks like this page has gone off the budget sheet!</p>
-    <p><b>No worries, just a slight calculation error!</b> Click <a href="/">here</a> to return to the home page and straighten out those numbers.</p>
+    <h1>Welcome, <%=user.userName%></h1>
+    <p>Todays date:</p><%=today%>
+    <p>Planned budget for this month</p>
+    <p><%=balance%></p>
+    
+    <a href="/transactions/<%=user.id%>/create"><button class="btn-form">Add transaction</button></a>
+    <h2>Your transaction</h1>
+    
+    <p>Plan your budget for the next month</p>
+    <a href="/balance/<%=user.id%>"><button class="btn-form">Add new month</button></a> 
     </div>
     <%- include('./partials/footer') %>
 </body>

@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({ extended: true }));
 
 // Use our Routes
-app.use("/users", users);
+app.use("/users", users.Router);
 app.use("/balance", balance);
 app.use("/subcategories", subcategories.Router);
 app.use("/transactions", transactions);
@@ -45,7 +45,12 @@ app.get('/help', (req, res) => {
 })
 
 app.get('/dashboard/:id', (req,res)=> {
-  res.render('dashboard', {title: 'dashboard'});
+
+  const usersData = users.UsersData;
+  console.log(usersData);
+  const id = req.params.id
+  let user = usersData.find(u => u.id == id)
+  res.render('dashboard', {title: 'dashboard', user, balance: '100', today: '2024-04-27', });
 })
 
 
