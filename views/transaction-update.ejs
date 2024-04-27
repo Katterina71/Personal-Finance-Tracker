@@ -39,16 +39,33 @@
     </table>
     <div class="div-transaction">
 
-    <form action="/transactions/<%= userId %>?transaction=<%= transactionId %>" method="patch">
-            <input type="submit" class = "btn-edit" value="Edit">
-     </form> 
-   
-     <a href="#" onclick="deleteTransaction('<%= userId %>', '<%= transactionId %>'); return false;"><button  class="btn-form">Delete</button></a>
+    <a href="" onclick="openForm('<%= userId %>', '<%= transactionId %>'); return false;"><button  class="btn-form">Edit</button></a>
+    <a href="" onclick="deleteTransaction('<%= userId %>', '<%= transactionId %>'); return false;"><button  class="btn-form">Delete</button></a>
 
-    </div>
+</div>
+     <form class="form-edit" action="/transactions/<%= userId %>/create" method="POST" id="editForm" style="visibility: hidden;">
+        <h2 style="color: #fac36a; margin:0">Add transaction:</h2>
+
+        <select name="subCategory" class = "input-filed" required>
+                <option value=<%= transaction.subCategoryId %> disabled><%=subcategory.name%></option> 
+        </select>
+
+        <input class = "input-filed" type="number" name="amount" value="<%=transaction.amount%>" required>
+        <input class = "input-filed" type="date" name="date"  value="<%=transaction.date%>" required>
+
+        <input class = "input-filed" type="text" name="description" value="<%=transaction.description%>">
+        <input class = "input-filed" type="text" name="cardName" value="<%=transaction.cardName%>">
+        <input class = "input-filed" type="text" name="type" value="<%=transaction.type%>">
+
+        <a href="#" onclick="saveChanges('<%= userId %>', '<%= transactionId %>'); return false;"><button  class="btn-form">Save Changes</button></a>
+
+    </form>
+
+  
     <%- include ('./partials/footer') %>
     
         <script>
+
         function deleteTransaction(userId, transactionId) {
             fetch(`/transactions/${userId}?transaction=${transactionId}`, {
                 method: 'DELETE',
@@ -60,6 +77,43 @@
 
             }).catch(error => console.error('Error:', error));
         }
+
+
+        function saveChanges(userId, transactionId) {
+
+        const form = document.getElementById('editForm');
+        const formData = new FormData(form);
+
+      
+        const data = new URLSearchParams();
+        for (const pair of formData) {
+        data.append(pair[0], pair[1]);
+        }
+
+            fetch(`/transactions/${userId}?transaction=${transactionId}`, {
+                method: 'PATCH',
+                body: data,
+                headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+            }).then(response => {
+                if (response.ok) return response.json();
+                throw new Error('Something went wrong');
+            }).then(data => {
+                
+            }).catch(error => console.error('Error:', error));
+        }
+
+        function openForm(){
+            const form = document.getElementById('editForm');
+            console.log(form);
+             if (form.style.visibility === 'hidden') {
+                 form.style.visibility = 'visible';
+                } else {
+        form.style.visibility = 'hidden';
+                }
+        }
+
         </script>
 </body>
 </html>

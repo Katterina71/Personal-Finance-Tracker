@@ -131,6 +131,7 @@ footer {
     align-self: center;
     display: flex;
     justify-content: center;
+    margin-top: 30px;
 }
 
 .div-form{
@@ -151,6 +152,23 @@ footer {
     padding: 60px 30px 40px;
     align-items: center;
     gap: 20px; 
+
+}
+
+.form-edit
+ {
+    
+    justify-self: center;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    min-height:300px;
+    border: 1px solid #fac36a;
+    border-radius: 10px;
+    padding: 60px 30px 40px;
+    align-items: center;
+    gap: 20px; 
+    
 
 }
 .input-filed, .select-category  {

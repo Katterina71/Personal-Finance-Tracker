@@ -49,11 +49,12 @@ router.route('/:id/create').get((req,res)=> {
 router.route('/:userId/')
 .get((req,res) => {
    
-
+  
     const userId = req.params.userId;
     const transactionId = req.query.transaction;
 
     let transactions = updateData.loadData(dataFilePath);
+
     let transaction = transactions.find(t => {
         if (t.id == transactionId &&  t.userId == userId){
             return t;
@@ -63,22 +64,26 @@ router.route('/:userId/')
     const categoriesDate = subcategories.CategoriesData;
     const subcategoriesDate = subcategories.Data;
 
-    console.log(transaction.subCategoryId);
 
     const subcategory = subcategoriesDate.find(sc => sc.id == transaction.subCategoryId);
+
+    if (!subcategory) {
+        subcategory = "";
+    }
+
     const category = categoriesDate.find(c => c.id == subcategory.categoryId);
+
+    if (!category) {
+        category = "";
+    }
 
     res.render('transaction-update', {title: 'Change transaction', userId, transactionId, transaction, category, subcategory} )
 }) 
 
 .delete((req, res, next) => {
-        console.log('click');
 
         const userId = req.params.userId;
         const transactionId = req.query.transaction;
-
-        console.log(userId);
-        console.log(transactionId);
 
         let transactions = updateData.loadData(dataFilePath);
         const transaction = transactions.find((t, i) => {
@@ -95,6 +100,41 @@ router.route('/:userId/')
         }
           else next();
      
+})
+
+.patch((req, res, next) => {
+
+    console.log('click')
+    console.log(req.params)
+    console.log(req.query)
+    console.log(req.body)
+
+
+    const userId = req.params.userId;
+    const transactionId = req.query.transaction;
+
+    let transactions = updateData.loadData(dataFilePath);
+  
+    const transaction = transactions.find((t, i) => {
+        if (t.id == transactionId && t.userId == userId) {
+
+          console.log(transactions[i]);
+          console.log(req.body);
+
+          for (const key of Object.keys(req.body)) {
+            transactions[i][key] = req.body[key];
+          }
+
+          return true;
+ } 
+}); 
+
+      if (transactions)  {
+        updateData.saveData(transactions, dataFilePath)
+        res.redirect(`/dashboard/${userId}`);
+    }
+      else next();
+ 
 })
 
 

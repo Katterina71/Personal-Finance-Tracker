@@ -15,7 +15,7 @@
     "subCategoryId": "3",
     "amount": "10",
     "date": "2024-04-11",
-    "description": "BreedFinder",
+    "description": "BreedFinder1",
     "cardName": "1",
     "type": "1"
   }
