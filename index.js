@@ -9,7 +9,8 @@ app.set('view engine', 'ejs');
 const subcategories = require("./routes/subcategories");
 const users = require("./routes/users.js");
 const balance =require("./routes/balance.js")
-// const balance = require("./routes/balance.js");
+const transactions =require("./routes/transactions.js")
+
 
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -19,6 +20,7 @@ app.use(bodyParser.json({ extended: true }));
 app.use("/users", users);
 app.use("/balance", balance);
 app.use("/subcategories", subcategories.Router);
+app.use("/transactions", transactions);
 
 //check
 // app.use((req, res, next) => {
@@ -29,7 +31,6 @@ app.use("/subcategories", subcategories.Router);
 
 //connect CSS file
 const path = require('path');
-app.use(express.static(path.join(__dirname, 'style')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 

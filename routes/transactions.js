@@ -1,29 +1,101 @@
 const express = require('express');
 const router = express.Router();
 
-const transactions = require('../data/transactions');
+const subcategories = require('./subcategories')
 
-const app = express();
-let ejs = require('ejs');
-app.set('view engine', 'ejs');
-
-
-//connect CSS file
+// Read and add update date to files
 const path = require('path');
-app.use(express.static(path.join(__dirname, '..style')));
-app.use(express.static(path.join(__dirname, 'public')));
+const updateData = require('../utilities/update-data-files');
+const dataFilePath = path.join(__dirname, '../data/transactions.js');
 
-router
-    .route('/api')
-    .get((req, res) => {
+router.route('/api').get((req, res) => {
+        let transactions = updateData.loadData(dataFilePath);
         res.json({ transactions });
-    })
+    });
 
-router
-    .route('/add')
-    .get((req,res)=> {
-        res.render('transaction', {title: 'Create a transaction'});
-      })
-      
+router.route('/:id/create').get((req,res)=> {
+        const userId = req.params.id; 
+        const subcategoriesDate = subcategories.Data;
+        res.render('transaction', {title: 'Create transaction', userId, subcategoriesDate});
+ })
+
+
+ router.post('/:id/create',(req, res, next) => {
+    
+    console.log(req.body);
+    console.log(req.params);
+    
+    if (req.body.subCategory && req.body.amount && req.body.date) {
+        let transactions = updateData.loadData(dataFilePath);
+
+        const transaction = {
+          id: transactions[transactions.length - 1].id + 1,
+          userId: req.params.id,
+          subCategoryId: req.body.subCategory,
+          amount: req.body.amount,
+          date: req.body.date,
+          description: req.body.description,
+          cardName: req.body.cardName,
+          type: req.body.type,
+        };
+        
+        transactions.push(transaction);
+        updateData.saveData(transactions, dataFilePath);
+        res.redirect(`/dashboard/${req.params.id}`)
+
+      } else next(res.send('Insufficient Data').status(404));
+});
+
+
+// router.post('/add',(req, res,next) => {
+  
+//     if (req.body.userName && req.body.login && req.body.password) {
+
+//         let users = updateData.loadData(dataFilePath);
+//         if (users.find((u) => u.login == req.body.login)) {
+//             next(res.render('register', {title: 'Register Form', userExist:'This user has already existed'}));
+//           }
+//         else {
+
+//         const user = {
+//           id: users[users.length - 1].id + 1,
+//           userName: req.body.userName,
+//           login: req.body.login,
+//           password: req.body.password,
+//         };
+        
+//         users.push(user);
+//         updateData.saveData(users, dataFilePath);
+//         res.redirect(`/dashboard/${user.id}`)
+
+//         }
+//       } else next(res.send('Insufficient Data').status(404));
+// });
+
+
+// router.route('/login').get((req,res)=> {
+//     res.render('login', {title: 'Login', userCheck: ''});
+//   });
+
+  
+// router.get('/login/check',(req, res, next) => {
+
+//     if (req.query.login && req.query.password) {
+//         let users = updateData.loadData(dataFilePath);
+//         let user = users.find((u) => u.login == req.query.login)
+
+//         if (user.login == req.query.login) {
+//             if (user.password == req.query.password){
+//              res.redirect(`/balance/${user.id}`)}
+//             else { next(res.redirect('/users/login'));
+//             }
+//           }
+          
+//         else {
+//             next(res.render('/users/login', {title: 'Login', userCheck:'This user not found'}));
+//         }
+//       } else next(res.send('Insufficient Data').status(404));
+
+// })
 
 module.exports = router;
