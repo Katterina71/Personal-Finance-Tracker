@@ -48,5 +48,15 @@
     "description": "BreedFinder",
     "cardName": "12",
     "type": "1"
+  },
+  {
+    "id": 7,
+    "userId": "9",
+    "subCategoryId": "13",
+    "amount": "10",
+    "date": "2024-04-25",
+    "description": "Coffe",
+    "cardName": "MasterCard",
+    "type": "Extension"
   }
 ]

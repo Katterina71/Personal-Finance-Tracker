@@ -22,8 +22,13 @@ router.post('/:id/create',(req, res, next) => {
  
     if (req.body.month && req.body.amount) {
         let allBalance = updateData.loadData(dataFilePath);
-        if (allBalance.find((b) => b.month == req.body.month) && allBalance.find((b) => b.userId == req.params.id)) {
-            next(res.render('register', {title: 'Register Form', userExist:`This month's budget has been set`}));
+
+        let check = allBalance.find((b) => {
+          if ((b.month == req.body.month) && (b.userId == req.params.id)) return b
+        })
+        console.log(!check);
+        if (check) {
+            next(res.redirect(`/dashboard/${req.params.id}`));
           }
         else {
 
@@ -44,5 +49,5 @@ router.post('/:id/create',(req, res, next) => {
 
 let balanceData = updateData.loadData(dataFilePath);
 
-exports.Router = router,
-exports.BalanceData = balanceData;
+exports.Router = router
+
