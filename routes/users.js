@@ -1,14 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const app = express();
 
 const path = require('path');
 const fs = require('fs');
-
-
-const bodyParser = require('body-parser');
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
 
 router.route('/api').get((req, res) => {
@@ -22,7 +16,7 @@ router.route('/register').get((req,res)=> {
 
 
 router.post('/add',(req, res,next) => {
-
+    console.log(req.method);
     if (req.body.userName && req.body.login && req.body.password) {
 
         let users = loadData();

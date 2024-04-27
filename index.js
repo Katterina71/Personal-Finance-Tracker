@@ -6,10 +6,10 @@ const port = 3000;
 let ejs = require('ejs');
 app.set('view engine', 'ejs');
 
-const users = require("./routes/users.js");
-const transactions = require("./routes/transactions");
-const balance = require("./routes/balance");
 const subcategories = require("./routes/subcategories");
+const users = require("./routes/users.js");
+
+
 
 
 const bodyParser = require("body-parser");
@@ -18,8 +18,6 @@ app.use(bodyParser.json({ extended: true }));
 
 // Use our Routes
 app.use("/users", users);
-app.use("/transactions", transactions);
-app.use("/balance", balance);
 app.use("/subcategories", subcategories.Router);
 
 //check
@@ -45,9 +43,9 @@ app.get('/help', (req, res) => {
     res.render('help', { title: 'Knowledge Repository', subcategoriesDate, categories });
 })
 
-app.get('/register', (req,res)=> {
-  res.render('register', {title: 'Register Form'});
-})
+// app.get('/register', (req,res)=> {
+//   res.render('register', {title: 'Register Form'});
+// })
 
 app.get('/login',(req,res)=> {
   res.render('login', {title: 'Login'});
