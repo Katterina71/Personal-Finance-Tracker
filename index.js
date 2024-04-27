@@ -10,6 +10,7 @@ const subcategories = require("./routes/subcategories");
 const users = require("./routes/users.js");
 const balance =require("./routes/balance.js")
 const transactions =require("./routes/transactions.js")
+const updateData = require('./utilities/update-data-files');
 
 
 const bodyParser = require("body-parser");
@@ -18,9 +19,9 @@ app.use(bodyParser.json({ extended: true }));
 
 // Use our Routes
 app.use("/users", users.Router);
-app.use("/balance", balance);
+app.use("/balance", balance.Router);
 app.use("/subcategories", subcategories.Router);
-app.use("/transactions", transactions);
+app.use("/transactions", transactions.Router);
 
 //check
 // app.use((req, res, next) => {
@@ -46,11 +47,26 @@ app.get('/help', (req, res) => {
 
 app.get('/dashboard/:id', (req,res)=> {
 
-  const usersData = users.UsersData;
-  console.log(usersData);
+  const today = new Date();
+  console.log(today);
+  const dateString = today.toISOString().split('T')[0];
+
+  //Find user
   const id = req.params.id
-  let user = usersData.find(u => u.id == id)
-  res.render('dashboard', {title: 'dashboard', user, balance: '100', today: '2024-04-27', });
+  let user = users.UsersData.find(u => u.id == id)
+
+  //Find current balance
+  let userBalance = balance.BalanceData.filter(u => u.userId == id);
+  let currentBudget = updateData.getAmountIfCurrentMonth(userBalance);
+  if (!currentBudget) {
+    currentBudget = 'There is no budget planned for this month'
+  }
+
+  //Find all transactions this month
+  let userAllTransactions = transactions.TransactionsData.filter(t =>t.userId == id)
+  let userMonthTransactions = updateData.getAllMonthTransactions(userAllTransactions, today)
+
+  res.render('dashboard', {title: 'Dashboard', user, balance: currentBudget, today: dateString, userMonthTransactions});
 })
 
 

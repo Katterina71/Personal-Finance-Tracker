@@ -131,5 +131,7 @@ router.route('/:userId/')
 
     })
 
+let transactionsData = updateData.loadData(dataFilePath);
 
-module.exports = router;
+exports.Router = router;
+exports.TransactionsData = transactionsData;

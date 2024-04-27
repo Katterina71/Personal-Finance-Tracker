@@ -5,13 +5,43 @@
     <%- include('./partials/nav') %>
     <div style="margin-top: 100px;">
     <h1>Welcome, <%=user.userName%></h1>
-    <p>Todays date:</p><%=today%>
-    <p>Planned budget for this month</p>
-    <p><%=balance%></p>
-    
+    <div>
+        <p>Todays date: <span style="font-size: 18px; font-weight: 700;"><%=today%></span></p>
+         <p>Planned budget for this month:  <span style="font-size: 18px; font-weight: 700;"><%=balance%></span></p>
+    </div>
+
     <a href="/transactions/<%=user.id%>/create"><button class="btn-form">Add transaction</button></a>
     <h2>Your transaction</h1>
-    
+        <table class="styled-table">
+            <th>
+            <thead>
+                <tr>
+                    <td style = 'font-weight: 700;'>Transaction date</td>
+                    <td style = 'font-weight: 700;'>Amount</td>
+                    <td style = 'font-weight: 700;'>Description</td>
+                    <td style = 'font-weight: 700;'>Card Name</td>
+                    <td style = 'font-weight: 700;'>Type of Spending</td>
+                    <td style = 'font-weight: 700;'>Editing</td>
+                </tr>
+            </thead>
+        <% if (userMonthTransactions.length > 0) { %>
+            <% userMonthTransactions.forEach(transaction=> { %>
+            
+                    <tr>
+                        
+                        <td><%=transaction.date%></td>
+                        <td><%=transaction.amount%></td>
+                        <td><%=transaction.description%></td>
+                        <td><%=transaction.cardName%></td>
+                        <td><%=transaction.type%></td>
+                        <td><a class="single" href="/transaction/<%=user.id%>/?transaction=<%= transaction.id %>"> Edit / Delete</a></td>
+                     </tr>
+            
+            <% }) %>
+          <% } else { %>
+            <p>There are no blogs to display...</p>
+          <% } %>
+        </table>
     <p>Plan your budget for the next month</p>
     <a href="/balance/<%=user.id%>"><button class="btn-form">Add new month</button></a> 
     </div>

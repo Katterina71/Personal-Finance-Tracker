@@ -20,10 +20,35 @@ function saveData(data, dataFilePath) {
     }
 }
 
-module.exports = {
-    loadData,
-    saveData
+
+function getAmountIfCurrentMonth(balance) {
+    let currentDate = new Date(); 
+    let currentMonthYear = currentDate.toISOString().slice(0, 7);
+
+    if (balance.month === currentMonthYear) {
+        return balance.amount;
+    }
+    return null; 
 }
+
+function getAllMonthTransactions(transaction, date) {
+    let monthNumber = date.getMonth() + 1; 
+    let yearNumber = date.getFullYear(); 
+    const datePrefix = `${yearNumber}-${monthNumber.toString().padStart(2, '0')}`;
+
+    return transaction.filter(transaction => {
+        const transactionDatePrefix = transaction.date.slice(0, 7);
+        return transactionDatePrefix === datePrefix;
+    });
+}
+
+exports.loadData = loadData;
+exports.saveData = saveData;
+exports.getAmountIfCurrentMonth = getAmountIfCurrentMonth;
+exports.getAllMonthTransactions = getAllMonthTransactions;
+
+
+
 
 // exports.loadData = loadData;
 // exports.saveData =  saveData;

@@ -42,6 +42,7 @@ router.post('/:id/create',(req, res, next) => {
       } else next(res.send('Insufficient Data').status(404));
 });
 
+let balanceData = updateData.loadData(dataFilePath);
 
-
-module.exports = router;
+exports.Router = router,
+exports.BalanceData = balanceData;
