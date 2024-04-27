@@ -4,7 +4,7 @@ const router = express.Router();
 const balance = require('../data/balance');
 
 router
-    .route('/')
+    .route('/api')
     .get((req, res) => {
         res.json({ balance });
     });

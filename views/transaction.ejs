@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include ('./partials/head') %>
+<body>
+    <%- include ('./partials/nav') %>
+    <div class="div-form">
+       
+        <form class="form" action="/dashbord" method="POST">
+            <h2 style="color: #fac36a; margin:0">Add transaction:</h2>
+            <input class = "input-filed" type="text" name="name" id="userName" placeholder="Name">
+            <input class = "input-filed"type="number" name="userName" id="login" placeholder="Create Account Name">
+            <input class = "input-filed"type="date" name="userName" id="login" placeholder="Create Account Name">
+
+            <select name="subcategories" id="subcategories" class="select-category">
+                <option value="34" class="select-category"></option>
+            </select>
+
+            <input class = "input-filed" type="text" name="description" id="userName" placeholder="Description">
+            <input class = "input-filed" type="text" name="cardName" id="cardName" placeholder="Card name">
+    
+            <input type="submit" class = "btn-form" value="Create transaction">
+  
+        </form>
+    </div>
+    <%- include ('./partials/footer') %>
+</body>
+</html>

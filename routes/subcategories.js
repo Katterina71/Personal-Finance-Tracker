@@ -5,7 +5,7 @@ const subcategories = require('../data/subcategories');
 const categories = require('../data/categories');
 
 router
-    .route('/')
+    .route('/api')
     .get((req, res) => {
         res.json({ subcategories });
     });

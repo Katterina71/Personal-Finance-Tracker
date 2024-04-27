@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include ('./partials/head') %>
+<body>
+    <%- include ('./partials/nav') %>
+    <div class="div-form">
+       
+        <form class="form" action="/dashbord" method="POST">
+            <h2 style="color: #fac36a; margin:0">Add your current budget:</h2>
+            <label for="dateStart"></label>
+            <!-- <input class = "input-filed" type="date" name="dateStart" id="dateStart" placeholder="Date Start">
+            <input class = "input-filed" type="date" name="dateEnd" id="dateEnd" placeholder="Date End"> -->
+
+            <input class = "input-filed" type="month" name="dateEnd" id="dateEnd" placeholder="Month">
+
+            <label for="amount"></label>
+            <input class = "input-filed" type="number" name="amount" id="amount" placeholder="Amount">
+            <input type="submit" class = "btn-form" value="Create account">
+
+        </form>
+    </div>
+    <%- include ('./partials/footer') %>
+</body>
+</html>

@@ -134,14 +134,15 @@ footer {
     display: flex;
     flex-direction: column;
     width: 300px;
-    height:380px;
+    min-height:300px;
     border: 1px solid #fac36a;
     border-radius: 10px;
-    padding: 60px 30px 0;
+    padding: 60px 30px 40px;
     align-items: center;
-    gap: 20px;  
+    gap: 20px; 
+
 }
-.input-filed {
+.input-filed, .select-category  {
     border: none;
     width: 250px;
     height: 50px;
