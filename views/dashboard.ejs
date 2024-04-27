@@ -34,12 +34,12 @@
                         <td><%=transaction.description%></td>
                         <td><%=transaction.cardName%></td>
                         <td><%=transaction.type%></td>
-                        <td><a class="single" href="/transaction/<%=user.id%>/?transaction=<%= transaction.id %>"> Edit / Delete</a></td>
+                        <td><a class="single" href="/transactions/<%=user.id%>/?transaction=<%= transaction.id %>"> Edit / Delete</a></td>
                      </tr>
             
             <% }) %>
           <% } else { %>
-            <p>There are no blogs to display...</p>
+            <p>There are no transactions to display...</p>
           <% } %>
         </table>
     <p>Plan your budget for the next month</p>

@@ -48,12 +48,13 @@ router.route('/:id/create').get((req,res)=> {
 
 router.route('/:userId/')
 .get((req,res) => {
-   
-  
+    console.log('click');
+    let transactions = updateData.loadData(dataFilePath);
+
+    console.log(transactions);
     const userId = req.params.userId;
     const transactionId = req.query.transaction;
 
-    let transactions = updateData.loadData(dataFilePath);
 
     let transaction = transactions.find(t => {
         if (t.id == transactionId &&  t.userId == userId){

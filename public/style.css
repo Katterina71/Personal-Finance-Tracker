@@ -207,7 +207,7 @@ footer {
 .styled-table thead tr {
     background-color: #fbf9f6; 
     color: #3d3d3d; 
-    text-align: left; /
+    text-align: left; 
 }
 
 .styled-table th,
@@ -221,5 +221,44 @@ footer {
 
 
 .styled-table tbody tr:hover {
-    background-color: #f1f1f1; /* Light gray background on hover */
+    background-color: #f1f1f1; 
+}
+
+
+.item-table {
+    width: 100%; 
+    margin: 25px 0; /
+    font-size: 0.9em; 
+    font-family: Arial, sans-serif;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1); 
+}
+
+.item-table  th, 
+.item-table  td {
+    padding: 12px 15px; 
+    text-align: left; 
+    border-bottom: 1px solid #dddddd; 
+}
+
+
+.item-table  thead th {
+    background-color: #fbf9f6;; 
+    color: #3d3d3d; 
+    text-align: center; 
+}
+
+
+.item-table  tbody tr:hover {
+    background-color: #f3f3f3; 
+}
+
+
+.item-table  .single {
+    color: #007bff;
+    text-decoration: none; 
+    font-weight: bold; 
+}
+
+.item-table  .single:hover {
+    text-decoration: underline; 
 }

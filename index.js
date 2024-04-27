@@ -13,6 +13,7 @@ const transactions =require("./routes/transactions.js")
 const updateData = require('./utilities/update-data-files');
 
 
+
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({ extended: true }));
@@ -34,6 +35,7 @@ app.use("/transactions", transactions.Router);
 const path = require('path');
 app.use(express.static(path.join(__dirname, 'public')));
 
+const dataFilePathTransactions = path.join(__dirname, './data/transactions.js');
 
 app.get('/', (req,res) => {
     res.render('home', {title: 'Main'})
@@ -63,7 +65,8 @@ app.get('/dashboard/:id', (req,res)=> {
   }
 
   //Find all transactions this month
-  let userAllTransactions = transactions.TransactionsData.filter(t =>t.userId == id)
+  const allTransactions = updateData.loadData(dataFilePathTransactions);
+  let userAllTransactions = allTransactions.filter(t =>t.userId == id)
   let userMonthTransactions = updateData.getAllMonthTransactions(userAllTransactions, today)
 
   res.render('dashboard', {title: 'Dashboard', user, balance: currentBudget, today: dateString, userMonthTransactions});
