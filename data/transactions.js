@@ -28,5 +28,25 @@
     "description": "BreedFinder",
     "cardName": "Ekaterina Iliushkina",
     "type": "1"
+  },
+  {
+    "id": 5,
+    "userId": "10",
+    "subCategoryId": "1",
+    "amount": "100",
+    "date": "2024-04-25",
+    "description": "BreedFinder",
+    "cardName": "1",
+    "type": "4"
+  },
+  {
+    "id": 6,
+    "userId": "10",
+    "subCategoryId": "1",
+    "amount": "100",
+    "date": "2024-04-19",
+    "description": "BreedFinder",
+    "cardName": "12",
+    "type": "1"
   }
 ]

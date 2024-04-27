@@ -34,21 +34,15 @@ function getAmountIfCurrentMonth(balance) {
     if (!balance.month) return null; 
 }
 
-function getAllMonthTransactions(balance, date) {
-    if (!Array.isArray(balance) || balance.length === 0) {
-        console.log('Invalid or empty balance array.');
-        return null;
-    }
+function getAllMonthTransactions(transactions, date) {
+    let monthNumber = date.getMonth() + 1; 
+    let yearNumber = date.getFullYear(); 
+    const datePrefix = `${yearNumber}-${monthNumber.toString().padStart(2, '0')}`;
 
-    let currentDate = new Date();
-    let currentMonthYear = currentDate.toISOString().slice(0, 7);
-
-    for (let item of balance) {
-        if (item.month === currentMonthYear) {
-            return item.amount;
-        }
-    }
-    return null;
+    return transactions.filter(transaction => {
+        const transactionDatePrefix = transaction.date.slice(0, 7);
+        return transactionDatePrefix === datePrefix;
+    });
 }
 
 exports.loadData = loadData;

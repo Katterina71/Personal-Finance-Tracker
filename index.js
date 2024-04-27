@@ -79,10 +79,13 @@ app.get('/dashboard/:id', (req,res)=> {
   }
   //Find all transactions this month
   const allTransactions = updateData.loadData(dataFilePathTransactions);
-  let userAllTransactions = allTransactions.filter(t =>t.userId == id);
+
+  let userAllTransactions = allTransactions.filter(t =>t.userId == req.params.id);
+  
 
 
   let userMonthTransactions = updateData.getAllMonthTransactions(userAllTransactions, today)
+  console.log("userMonthTransactions")
   console.log(userMonthTransactions);
   
   res.render('dashboard', {title: 'Dashboard', user, currentBudget, today: dateString, userMonthTransactions});
