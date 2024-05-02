@@ -29,7 +29,7 @@ The application utilizes a robust JSON-based data structure comprising:
 - **Balance**: Keeps track of monthly financial balances.
 - **Categories/Subcategories**: Organizes expenses into manageable groups.
 
-An illustrative diagram of the data structure is included to help understand the relationships between different entities. (Note: Here you would link to an image or include it directly in your repository and use Markdown to display it.)
+An illustrative diagram of the data structure is included to help understand the relationships between different entities. 
 
 ![Data Structure](https://github.com/Katterina71/Personal-Finance-Tracker/blob/main/dataScheme/PersonalFinanceTracker.png) <!-- Update with the path to your image -->
 
